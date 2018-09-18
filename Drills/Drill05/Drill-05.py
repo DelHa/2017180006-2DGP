@@ -27,15 +27,17 @@ pos10_x, pos10_y = 712, 349
 # 800//2 -> 화면의 중심으로 이동시키는것을 바로 알아볼 수 있다.
 # 코드가 실행이 가능할때 commit 한다.
 
-
-def move_left_chart():
-    x = 0
+move_x = 0
+move_y = 0
+def move_left_chart(move_x, move_y):
+    x = move_x
+    y = move_y
     frame = 0
 
     while x < 800:
         clear_canvas()
         grass.draw(400, 30)
-        character.clip_draw(frame * 100, 100, 100, 100, x, 90)
+        character.clip_draw(frame * 100, 100, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
         x += 10
@@ -43,14 +45,15 @@ def move_left_chart():
         get_events()
 
 
-def move_right_chart():
-    x = 800
+def move_right_chart(move_x, move_y):
+    x = move_x
+    y = move_y
     frame = 0
 
     while x > 0:
         clear_canvas()
         grass.draw(400, 30)
-        character.clip_draw(frame * 100, 0, 100, 100, x, 90)
+        character.clip_draw(frame * 100, 0, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
         x -= 10
@@ -59,8 +62,8 @@ def move_right_chart():
 
 
 while (True):
-    move_left_chart()
-    move_right_chart()
+    move_left_chart(pos1_x, pos1_y)
+    move_right_chart(pos2_x, pos2_y)
 
 
 close_canvas()
