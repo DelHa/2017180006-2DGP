@@ -10,6 +10,18 @@ character = load_image('character.png')
 # 함수 이름은 '항상 동사'로 시작되어야한다.
 # 함수를 적절하게 사용하면 코더의 의도가 보인다.
 # 800//2 -> 화면의 중심으로 이동시키는것을 바로 알아볼 수 있다.
+# 코드가 실행이 가능할때 commit 한다.
+def look_chart():
+    pass
+def move_chart():
+    pass
+
+def move_charater():
+    look_chart()
+    move_chart()
+
+while True:
+    move_charater()
 
 
 close_canvas()
