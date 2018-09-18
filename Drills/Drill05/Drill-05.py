@@ -57,6 +57,7 @@ def move_left_to_center():
         delay(0.01)
 
 # 검증된 코드는 #을 붙여서 생략하고 다음 확인해야 하는 코드를 확인한다.
+# 검증된 코드를 한번에 확인하는 작업을 통합이라고 이야기한다.
 def make_rectangle():
     move_from_center_to_right()
     move_up()
@@ -64,13 +65,26 @@ def make_rectangle():
     move_down()
     move_left_to_center()
 
+import math
+
 
 def make_circle():
+    cx , cy, r= 800 // 2, 600 // 2, (600 - 180) // 2
+    degree = -90
+    while degree < 270:
+        radian = math.radians(degree)
+        x = cx + r * math.cos(radian)
+        y = cy + r * math.sin(radian)
 
-    pass
+        clear_canvas_now()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        degree += 1
+        delay(0.01)
+
 
 while True:
-    make_rectangle()
+   # make_rectangle()
     make_circle()
 
 
