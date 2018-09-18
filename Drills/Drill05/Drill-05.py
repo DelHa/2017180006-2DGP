@@ -80,7 +80,7 @@ def choose_move_pos(old_x, old_y, new_x, new_y):
 while (True):
     choose_move_pos(pos1_x, pos1_y, pos2_x, pos2_y)
     choose_move_pos(pos2_x, pos2_y, pos3_x, pos3_y)
-    #choose_move_pos(pos3_x, pos3_y, pos4_x, pos4_y)
+    choose_move_pos(pos3_x, pos3_y, pos4_x, pos4_y)
     #choose_move_pos(pos4_x, pos4_y, pos5_x, pos5_y)
     #choose_move_pos(pos5_x, pos5_y, pos6_x, pos6_y)
     #choose_move_pos(pos6_x, pos6_y, pos7_x, pos7_y)
