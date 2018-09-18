@@ -59,7 +59,7 @@ def move_right_chart():
 
 
 while (True):
-    #move_left_chart()
+    move_left_chart()
     move_right_chart()
 
 
