@@ -1,4 +1,6 @@
 from pico2d import *
+os.chdir("C:\\git_2DGP\\2017180006-2DGP\\Drills\\Drill05")
+os.getcwd()
 
 open_canvas()
 
@@ -24,24 +26,29 @@ pos10_x, pos10_y = 712, 349
 # 함수를 적절하게 사용하면 코더의 의도가 보인다.
 # 800//2 -> 화면의 중심으로 이동시키는것을 바로 알아볼 수 있다.
 # 코드가 실행이 가능할때 commit 한다.
-frame = 0
-def move_left_chart(lx, ly):
-    character.clip_draw(frame * 100 , 0, 100 , 100 , x , 90)
-    update_canvas()
-    frame = (frame + 1)% 8
-    x += 5
-    delay(0.05)
-    get_events()
+
+
+def move_left_chart():
+    x = 0
+    frame = 0
+
+    while x < 800:
+        clear_canvas()
+        grass.draw(400, 30)
+        character.clip_draw(frame * 100, 100, 100, 100, x, 90)
+        update_canvas()
+        frame = (frame + 1) % 8
+        x += 10
+        delay(0.05)
+        get_events()
 
 
 def move_right_chart():
-    character.clip_draw(rx, ry)
+    pass
 
-
-
-while True:
-    move_left_chart(lx, ly)
-    move_right_chart(rx, ry)
+while (True):
+    move_left_chart()
+    #move_right_chart()
 
 
 close_canvas()
