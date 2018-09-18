@@ -29,41 +29,66 @@ pos10_x, pos10_y = 712, 349
 
 move_x = 0
 move_y = 0
-def move_left_chart(move_x, move_y):
-    x = move_x
-    y = move_y
+old_x =0
+old_y=0
+new_x=0
+new_y=0
+
+def move_left_chart(move_x, move_y, old_x ,old_y):
+    x = old_x
+    y = old_y
+    to_x = move_x - old_x
+    to_y = move_y - old_y
     frame = 0
 
-    while x < 800:
-        clear_canvas()
-        grass.draw(400, 30)
-        character.clip_draw(frame * 100, 100, 100, 100, x, y)
-        update_canvas()
-        frame = (frame + 1) % 8
-        x += 10
-        delay(0.05)
-        get_events()
-
-
-def move_right_chart(move_x, move_y):
-    x = move_x
-    y = move_y
-    frame = 0
-
-    while x > 0:
+    for i in range(0 ,10):
         clear_canvas()
         grass.draw(400, 30)
         character.clip_draw(frame * 100, 0, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
-        x -= 10
+        x += to_x//10
+        y += to_y//10
         delay(0.05)
-        get_events()
+
+
+def move_right_chart(move_x, move_y, old_x, old_y):
+    x = old_x
+    y = old_y
+    to_x = move_x - old_x
+    to_y = move_y - old_y
+
+    frame = 0
+
+    for i in range(0, 10):
+        clear_canvas()
+        grass.draw(400, 30)
+        character.clip_draw(frame * 100, 100, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+        x += to_x//10
+        y += to_y//10
+        delay(0.05)
+
+def choose_move_pos(old_x, old_y, new_x, new_y):
+    if(new_x > old_x):
+        move_right_chart(new_x, new_y, old_x, old_y)
+    elif(new_x < old_x):
+        move_left_chart( new_x, new_y, old_x, old_y)
 
 
 while (True):
-    move_left_chart(pos1_x, pos1_y)
-    move_right_chart(pos2_x, pos2_y)
+    choose_move_pos(pos1_x, pos1_y, pos2_x, pos2_y)
+    #choose_move_pos(pos2_x, pos2_y, pos3_x, pos3_y)
+    #choose_move_pos(pos3_x, pos3_y, pos4_x, pos4_y)
+    #choose_move_pos(pos4_x, pos4_y, pos5_x, pos5_y)
+    #choose_move_pos(pos5_x, pos5_y, pos6_x, pos6_y)
+    #choose_move_pos(pos6_x, pos6_y, pos7_x, pos7_y)
+    #choose_move_pos(pos7_x, pos7_y, pos8_x, pos8_y)
+    #choose_move_pos(pos8_x, pos8_y, pos9_x, pos9_y)
+    #choose_move_pos(pos9_x, pos9_y, pos10_x, pos10_y)
+    #choose_move_pos(pos10_x, pos10_y, pos1_x, pos1_y)
+
 
 
 close_canvas()
