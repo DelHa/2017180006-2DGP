@@ -29,15 +29,36 @@ def move_up():
         delay(0.01)
 
 def move_left():
-    pass
+    x, y = 800 - 25, 600 - 50
+    while x > 0 + 25:
+        clear_canvas_now()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        x -= 2
+        delay(0.01)
+
 def move_down():
-    pass
+    x, y = 0 + 25, 600 - 50
+    while y > 50 + 40:
+        clear_canvas_now()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        y -= 2
+        delay(0.01)
+
+
 def move_left_to_center():
-    pass
+    x, y = 0 + 25, 50 + 40
+    while x < 800//2:
+        clear_canvas_now()
+        grass.draw_now(400, 30)
+        character.draw_now(x, y)
+        x += 2
+        delay(0.01)
 
 # 검증된 코드는 #을 붙여서 생략하고 다음 확인해야 하는 코드를 확인한다.
 def make_rectangle():
-    #move_from_center_to_right()
+    move_from_center_to_right()
     move_up()
     move_left()
     move_down()
