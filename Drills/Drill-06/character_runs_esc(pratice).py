@@ -1,6 +1,6 @@
 from pico2d import *
 
-os.chdir("D:\\Back_git\\2017180006-2DGP\\Drills\\Drill-06")
+#os.chdir("D:\\Back_git\\2017180006-2DGP\\Drills\\Drill-06")
 open_canvas()
 grass = load_image('grass.png')
 character = load_image('animation_sheet.png')
