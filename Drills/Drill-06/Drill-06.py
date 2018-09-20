@@ -3,7 +3,6 @@ from pico2d import *
 #윈도우 생성전에 만든다.
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 
-
 def handle_events():
     global running
     global click_x, click_y
@@ -16,7 +15,7 @@ def handle_events():
         elif event.type == SDL_MOUSEMOTION:
             mouse_x, mouse_y = event.x, KPU_HEIGHT - 1 - event.y
         elif event.type == SDL_MOUSEBUTTONDOWN:
-            click_x, click_y = mouse_x - 20, mouse_y + 21
+            click_x, click_y = mouse_x + 70, mouse_y + 21
             again_click = True
         elif event.type == SDL_MOUSEBUTTONUP:
             again_click = False
@@ -31,8 +30,6 @@ def move_character():
     global again_click
     frame = 0
     handle_events()
-
-
 
     for i in range(0, 100):
         move_x = (click_x - char_x)
@@ -74,7 +71,9 @@ again_click = False
 hide_cursor()
 
 while running:
+    #핸들 이벤트를 받는다.
     handle_events()
+
     move_character()
 
 close_canvas()
