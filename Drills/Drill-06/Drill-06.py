@@ -29,6 +29,7 @@ def move_character():
     global frame
     global again_click
     frame = 0
+    #핸들이벤트를 받는다.
     handle_events()
 
     for i in range(0, 100):
