@@ -73,7 +73,7 @@ hide_cursor()
 while running:
     #핸들 이벤트를 받는다.
     handle_events()
-
+    #캐릭터를 그린다.
     move_character()
 
 close_canvas()
