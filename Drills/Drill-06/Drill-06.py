@@ -5,7 +5,19 @@ KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 
 
 def handle_events():
-    pass
+    global running
+    global click_x, click_y
+    global mouse_x, mouse_y
+    events = get_events()
+    for event in get_events():
+        if event.type == SDL_QUIT:
+            running = False
+        elif event.type == SDL_MOUSEMOTION:
+            mouse_x, mouse_y = event.x, KPU_HEIGHT - 1 - event.y
+        elif event.type == SDL_MOUSEBUTTONDOWN:
+            click_x, click_y = mouse_x - 20, mouse_y + 21
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            running = False
 
 def move_character():
     pass
