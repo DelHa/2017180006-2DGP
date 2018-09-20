@@ -20,8 +20,31 @@ def handle_events():
             running = False
 
 def move_character():
-    pass
+    global char_x, char_y
+    global move_x, move_y
+    global look
+    global frame
+    frame = 0
+    handle_events()
 
+    if click_x > char_x:
+        look = 1
+    elif click_x < char_x:
+        look = 0
+
+    move_x = (click_x - char_x)
+    move_y = (click_y - char_y)
+
+    for i in range(0, 100):
+        clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        character.clip_draw(frame * 100, 100 * look, 100, 100, char_x, char_y)
+        hand.draw_now(mouse_x, mouse_y)
+        handle_events()
+        update_canvas()
+        frame = (frame + 1) % 8
+        char_y += move_y // 100
+        char_x += move_x // 100
 
 
 open_canvas(KPU_WIDTH, KPU_HEIGHT)
