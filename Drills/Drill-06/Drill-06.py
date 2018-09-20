@@ -8,6 +8,7 @@ def handle_events():
     global running
     global click_x, click_y
     global mouse_x, mouse_y
+    global  again_click
     events = get_events()
     for event in get_events():
         if event.type == SDL_QUIT:
@@ -16,6 +17,9 @@ def handle_events():
             mouse_x, mouse_y = event.x, KPU_HEIGHT - 1 - event.y
         elif event.type == SDL_MOUSEBUTTONDOWN:
             click_x, click_y = mouse_x - 20, mouse_y + 21
+            again_click = True
+        elif event.type == SDL_MOUSEBUTTONUP:
+            again_click = False
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
@@ -24,18 +28,20 @@ def move_character():
     global move_x, move_y
     global look
     global frame
+    global again_click
     frame = 0
     handle_events()
 
-    if click_x > char_x:
-        look = 1
-    elif click_x < char_x:
-        look = 0
 
-    move_x = (click_x - char_x)
-    move_y = (click_y - char_y)
 
     for i in range(0, 100):
+        move_x = (click_x - char_x)
+        move_y = (click_y - char_y)
+        if click_x > char_x:
+            look = 1
+        elif click_x < char_x:
+            look = 0
+
         clear_canvas()
         kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
         handle_events()
@@ -45,6 +51,7 @@ def move_character():
         frame = (frame + 1) % 8
         char_y += move_y // 100
         char_x += move_x // 100
+
 
 
 open_canvas(KPU_WIDTH, KPU_HEIGHT)
@@ -62,6 +69,8 @@ look = 1
 frame = 0
 #running => roof controll variable
 running = True
+again_click = False
+
 hide_cursor()
 
 while running:
