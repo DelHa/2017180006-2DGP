@@ -38,9 +38,9 @@ def move_character():
     for i in range(0, 100):
         clear_canvas()
         kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+        handle_events()
         character.clip_draw(frame * 100, 100 * look, 100, 100, char_x, char_y)
         hand.draw_now(mouse_x, mouse_y)
-        handle_events()
         update_canvas()
         frame = (frame + 1) % 8
         char_y += move_y // 100
