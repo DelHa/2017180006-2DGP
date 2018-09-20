@@ -22,13 +22,19 @@ character = load_image('animation_sheet.png')
 
 running = True
 x, y = KPU_WIDTH // 2, KPU_HEIGHT // 2
+look = 1
 frame = 0
 hide_cursor()
 
 while running:
     clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
-    character.clip_draw(frame * 100, 100 * 1, 100, 100, x, y)
+    if x > KPU_WIDTH//2:
+        look = 1
+    elif x < KPU_WIDTH//2:
+        look = 0
+
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
     update_canvas()
     frame = (frame + 1) % 8
 
