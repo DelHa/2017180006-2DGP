@@ -90,11 +90,11 @@ def draw_line(p1, p2):
     #draw_big_point(p2)
 
     if p1[0] > p2[0]:
-        look = 1
-    else:
         look = 0
+    else:
+        look = 1
 
-    for i in range(0,100 + 1, 2):
+    for i in range(0,100 + 1, 1):
         t = i / 100
         x = (1-t) * p1[0] + t*p2[0]
         y = (1-t) * p1[1] + t*p2[1]
