@@ -6,6 +6,7 @@ os.chdir("C:\\git\\2017180006-2DGP\\Drills\\Drill-07")
 
 KPU_WIDTH, KPU_HEIGHT = 1280, 1024
 open_canvas(KPU_WIDTH, KPU_HEIGHT)
+kpu_ground = load_image('KPU_GROUND.png')
 
 def stop():
     turtle.bye()
@@ -99,11 +100,13 @@ def draw_line(p1, p2):
         x = (1-t) * p1[0] + t*p2[0]
         y = (1-t) * p1[1] + t*p2[1]
         clear_canvas()
+        kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
 
     clear_canvas()
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
     update_canvas()
     frame = (frame + 1) % 8
@@ -124,3 +127,4 @@ while True:
     n = (n+1) % size
 
 turtle.done()
+close_canvas()
