@@ -3,7 +3,9 @@ import random
 from pico2d import *
 #캐릭터 업로드
 os.chdir("C:\\git\\2017180006-2DGP\\Drills\\Drill-07")
-character = load_image('animation_sheet.png')
+
+KPU_WIDTH, KPU_HEIGHT = 1280, 1024
+open_canvas(KPU_WIDTH, KPU_HEIGHT)
 
 def stop():
     turtle.bye()
@@ -75,6 +77,7 @@ frame = 0
 #running => roof controll variable
 running = True
 again_click = False
+character = load_image('animation_sheet.png')
 
 def draw_line(p1, p2):
     global look
@@ -95,15 +98,23 @@ def draw_line(p1, p2):
         t = i / 100
         x = (1-t) * p1[0] + t*p2[0]
         y = (1-t) * p1[1] + t*p2[1]
-        draw_point((x, y))
-    draw_point(p2)
+        clear_canvas()
+        character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+        update_canvas()
+        frame = (frame + 1) % 8
+
+    clear_canvas()
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+    update_canvas()
+    frame = (frame + 1) % 8
+
 
 prepare_turtle_canvas()
 
 
 #points = [(-300, 200), (400, 350), (300, -300), (-200, -200)]
 
-size = 10
+size = 20
 points = [(random.randint(-500 , 500), random.randint(-350, 350)) for i in range(size)]
 
 n = 1
