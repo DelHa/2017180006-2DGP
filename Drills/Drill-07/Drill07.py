@@ -1,6 +1,9 @@
 import turtle
 import random
-
+from pico2d import *
+#캐릭터 업로드
+os.chdir("C:\\git\\2017180006-2DGP\\Drills\\Drill-07")
+character = load_image('animation_sheet.png')
 
 def stop():
     turtle.bye()
@@ -67,9 +70,26 @@ def draw_line_basic(p1, p2):
     draw_point(p2)
 
 
+look = 1
+frame = 0
+#running => roof controll variable
+running = True
+again_click = False
+
 def draw_line(p1, p2):
+    global look
+    global frame
+    global again_click
+    global x
+    global y
+
     draw_big_point(p1)
     draw_big_point(p2)
+
+    if p1[0] > p2[0]:
+        look = 1
+    else:
+        look = 0
 
     for i in range(0,100 + 1, 10):
         t = i / 100
