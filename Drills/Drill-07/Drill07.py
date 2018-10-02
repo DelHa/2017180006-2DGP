@@ -12,31 +12,8 @@ def stop():
     turtle.bye()
 
 
-def draw_point(p):
-    turtle.goto(p)
-    #turtle.dot(5, random.random(), random.random(), random.random())
-
-
-def draw_line_basic(p1, p2):
-    #draw_big_point(p1)
-    #draw_big_point(p2)
-
-    x1, y1 = p1[0], p2[1]
-    x2, y2 = p1[0], p2[1]
-
-    a=(y2 - y1)/ (x2 - x1)
-    b= y1 - x1 * a
-
-    for x in range (x1, x2+1,10):
-        y=a*x + b
-        draw_point((x,y))
-
-    #draw_point(p2)
-
-
 look = 1
 frame = 0
-#running => roof controll variable
 running = True
 again_click = False
 character = load_image('animation_sheet.png')
@@ -47,9 +24,6 @@ def draw_line(p1, p2):
     global again_click
     global x
     global y
-
-    #draw_big_point(p1)
-    #draw_big_point(p2)
 
     if p1[0] > p2[0]:
         look = 0
