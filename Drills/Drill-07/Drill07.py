@@ -94,7 +94,7 @@ def draw_line(p1, p2):
     else:
         look = 0
 
-    for i in range(0,100 + 1, 10):
+    for i in range(0,100 + 1, 2):
         t = i / 100
         x = (1-t) * p1[0] + t*p2[0]
         y = (1-t) * p1[1] + t*p2[1]
@@ -115,7 +115,7 @@ def draw_line(p1, p2):
 #points = [(-300, 200), (400, 350), (300, -300), (-200, -200)]
 
 size = 20
-points = [(random.randint(-500 , 500), random.randint(-350, 350)) for i in range(size)]
+points = [(random.randint(100 , KPU_WIDTH - 100), random.randint(100,KPU_HEIGHT - 100)) for i in range(size)]
 
 n = 1
 
