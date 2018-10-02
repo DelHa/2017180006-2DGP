@@ -51,7 +51,7 @@ def draw_point(p):
 
 
 def draw_line_basic(p1, p2):
-    # fill here
+
     pass
 
 
