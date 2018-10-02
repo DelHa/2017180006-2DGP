@@ -52,12 +52,12 @@ def draw_big_point(p):
 
 def draw_point(p):
     turtle.goto(p)
-    turtle.dot(5, random.random(), random.random(), random.random())
+    #turtle.dot(5, random.random(), random.random(), random.random())
 
 
 def draw_line_basic(p1, p2):
-    draw_big_point(p1)
-    draw_big_point(p2)
+    #draw_big_point(p1)
+    #draw_big_point(p2)
 
     x1, y1 = p1[0], p2[1]
     x2, y2 = p1[0], p2[1]
@@ -69,7 +69,7 @@ def draw_line_basic(p1, p2):
         y=a*x + b
         draw_point((x,y))
 
-    draw_point(p2)
+    #draw_point(p2)
 
 
 look = 1
@@ -86,8 +86,8 @@ def draw_line(p1, p2):
     global x
     global y
 
-    draw_big_point(p1)
-    draw_big_point(p2)
+    #draw_big_point(p1)
+    #draw_big_point(p2)
 
     if p1[0] > p2[0]:
         look = 1
@@ -109,7 +109,7 @@ def draw_line(p1, p2):
     frame = (frame + 1) % 8
 
 
-prepare_turtle_canvas()
+#prepare_turtle_canvas()
 
 
 #points = [(-300, 200), (400, 350), (300, -300), (-200, -200)]
