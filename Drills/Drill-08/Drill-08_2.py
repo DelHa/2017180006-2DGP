@@ -66,11 +66,9 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+        character.clip_draw(frame * 100, 100 * look, 100, 100, p1[0], p1[1])
         update_canvas()
         frame = (frame + 1) % 8
-        character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
-
-    character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
 
     # draw p2-p3
     for i in range(0, 100, 1):
@@ -89,11 +87,10 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+        character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
         update_canvas()
         frame = (frame + 1) % 8
-        character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
 
-    character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
 
     # draw p3-p4
     for i in range(0, 100, 1):
@@ -112,12 +109,9 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
-        character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
+        character.clip_draw(frame * 100, 100 * look, 100, 100, p3[0], p3[1])
         update_canvas()
         frame = (frame + 1) % 8
-
-
-    character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
 
 
 #prepare_turtle_canvas()
