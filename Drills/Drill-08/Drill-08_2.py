@@ -17,7 +17,9 @@ frame = 0
 running = True
 again_click = False
 character = load_image('animation_sheet.png')
-
+save_frame1 = 0
+save_frame2 = 0
+save_frame3 = 0
 
 
 def draw_big_point(p):
@@ -48,8 +50,13 @@ def draw_curve_3_points(p1, p2, p3, p4):
     global again_click
     global x
     global y
+    global save_frame1
+    global save_frame2
+    global save_frame3
 
     # draw p1-p2
+    character.clip_draw(save_frame1 * 100, 100 * look, 100, 100, p1[0], p1[1])
+
     for i in range(0, 50, 1):
         t = i / 100
         x = (2 * t ** 2 - 3 * t + 1) * p1[0] + (-4 * t ** 2 + 4 * t) * p2[0] + (2 * t ** 2 - t) * p3[0]
@@ -66,9 +73,13 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
-        character.clip_draw(frame * 100, 100 * look, 100, 100, p1[0], p1[1])
         update_canvas()
+        if i >= 50:
+            character.clip_draw(save_frame1 * 100, 100 * look, 100, 100, p1[0], p1[1])
+            update_canvas()
+
         frame = (frame + 1) % 8
+        save_frame1 = frame
 
     # draw p2-p3
     for i in range(0, 100, 1):
@@ -87,10 +98,14 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
-        character.clip_draw(frame * 100, 100 * look, 100, 100, p2[0], p2[1])
-        update_canvas()
-        frame = (frame + 1) % 8
+        if i >= 50:
+            character.clip_draw(save_frame2 * 100, 100 * look, 100, 100, p2[0], p2[1])
+            update_canvas()
+        else:
+            update_canvas()
 
+        frame = (frame + 1) % 8
+        save_frame2 = frame
 
     # draw p3-p4
     for i in range(0, 100, 1):
@@ -109,9 +124,13 @@ def draw_curve_3_points(p1, p2, p3, p4):
             look = 1
 
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
-        character.clip_draw(frame * 100, 100 * look, 100, 100, p3[0], p3[1])
+        if i >= 50:
+            character.clip_draw(save_frame3 * 100, 100 * look, 100, 100, p3[0], p3[1])
+
         update_canvas()
+
         frame = (frame + 1) % 8
+        save_frame3 = frame
 
 
 #prepare_turtle_canvas()
@@ -125,5 +144,5 @@ while True:
     draw_curve_3_points(points[n-3],points[n-2],points[n-1], points[n])
     n = (n+3) % size
 
-
+close_canvas()
 turtle.done()
