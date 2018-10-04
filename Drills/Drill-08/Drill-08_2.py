@@ -18,37 +18,6 @@ running = True
 again_click = False
 character = load_image('animation_sheet.png')
 
-def prepare_turtle_canvas():
-    turtle.setup(1024, 768)
-    turtle.bgcolor(0.2, 0.2, 0.2)
-    turtle.penup()
-    turtle.hideturtle()
-    turtle.shape('arrow')
-    turtle.shapesize(2)
-    turtle.pensize(5)
-    turtle.color(1, 0, 0)
-    turtle.speed(100)
-    turtle.goto(-500, 0)
-    turtle.pendown()
-    turtle.goto(480, 0)
-    turtle.stamp()
-    turtle.penup()
-    turtle.goto(0, -360)
-    turtle.pendown()
-    turtle.goto(0, 360)
-    turtle.setheading(90)
-    turtle.stamp()
-    turtle.penup()
-    turtle.home()
-
-    turtle.shape('circle')
-    turtle.pensize(1)
-    turtle.color(0, 0, 0)
-    turtle.speed(50)
-
-    turtle.onkey(stop, 'Escape')
-    turtle.listen()
-
 
 
 def draw_big_point(p):
@@ -59,13 +28,21 @@ def draw_big_point(p):
 
 
 def draw_point(p):
-    turtle.goto(p)
-    turtle.dot(5, random.random(), random.random(), random.random())
+    global look
+    global frame
+    global again_click
+    global x
+    global y
+
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+    update_canvas()
+    frame = (frame + 1) % 8
 
 
 
-
-def draw_curve_4_points(p1, p2, p3, p4):
+def draw_curve_3_points(p1, p2, p3, p4):
     global look
     global frame
     global again_click
@@ -89,7 +66,11 @@ def draw_curve_4_points(p1, p2, p3, p4):
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
-    draw_point(p2)
+
+
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+    update_canvas()
 
     # draw p2-p3
     for i in range(0, 100, 1):
@@ -109,7 +90,11 @@ def draw_curve_4_points(p1, p2, p3, p4):
         character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
         update_canvas()
         frame = (frame + 1) % 8
-    draw_point(p3)
+
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+    update_canvas()
+
 
     # draw p3-p4
     for i in range(0, 100, 1):
@@ -130,17 +115,27 @@ def draw_curve_4_points(p1, p2, p3, p4):
         update_canvas()
         frame = (frame + 1) % 8
 
-    clear_canvas()
+    #clear_canvas()
     kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
     character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
     update_canvas()
     frame = (frame + 1) % 8
-    draw_point(p1)
+
+    kpu_ground.draw(KPU_WIDTH // 2, KPU_HEIGHT // 2)
+    character.clip_draw(frame * 100, 100 * look, 100, 100, x, y)
+    update_canvas()
 
 
-prepare_turtle_canvas()
+#prepare_turtle_canvas()
+
+size = 20
+points = [(random.randint(300 , KPU_WIDTH - 100), random.randint(300,KPU_HEIGHT - 100)) for i in range(size)]
+
+n = 3
 
 while True:
-    draw_curve_4_points((-300, 200), (400, 350), (300, -300), (-200, -200))
+    draw_curve_3_points(points[n-3],points[n-2],points[n-1], points[n])
+    n = (n+3) % size
+
 
 turtle.done()
