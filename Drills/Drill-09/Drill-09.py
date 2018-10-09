@@ -65,11 +65,22 @@ def handle_events():
             running = False
 
 # initialization code
+
 open_canvas()
 boy = Boy()
+small_ball = Small_Ball()
+big_ball = Big_Ball()
 grass = Grass()
 
-running = True
+running = True;
+
+rand_num = random.randint(2,19)
+
+team = [Boy() for i in range(11)]
+#
+#랜덤 공 생성
+_samll_ball_num = [Small_Ball() for i in range(rand_num)]
+_blg_ball_num = [Big_Ball() for i in range(20-rand_num)]
 
 
 # game main loop code
