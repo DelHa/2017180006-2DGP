@@ -107,7 +107,8 @@ while running:
         boy.draw()
 
     # 공 출력
-    # 작은공 #
+    # 작은공
+    # 완성#
 
     for small_ball in _samll_ball_num:
         small_ball.draw()
