@@ -1,5 +1,5 @@
 from pico2d import *
-
+import random
 # Game object class here
 class Grass:
     def __init__(self):
@@ -18,6 +18,40 @@ class Boy:
         self.x += 5
     def draw(self):
         self.image.clip_draw(self.frame * 100 , 0,100,100,self.x, self.y)
+
+
+
+class Small_Ball:
+    def __init__(self):
+        #랜덤하게 출력
+        self.x , self.y = random.randint(100, 600),500
+        self.image = load_image('ball21x21.png')
+        self.frame = random.randint(3,10)
+
+    def update(self):
+        #frame random
+        if (self.y > 70):
+            self.y -= self.frame
+
+    def draw(self):
+        self.image.draw(self.x , self.y)
+
+class Big_Ball:
+    def __init__(self):
+        #랜덤하게 출력
+        self.x , self.y = random.randint(100, 700),500
+        self.image = load_image('ball41x41.png')
+        self.frame = random.randint(3,10)
+
+    def update(self):
+        #frame random
+        if(self.y > 70):
+            self.y -= self.frame
+
+    def draw(self):
+        self.image.draw(self.x , self.y)
+
+
 
 
 
