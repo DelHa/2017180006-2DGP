@@ -87,10 +87,35 @@ _blg_ball_num = [Big_Ball() for i in range(20-rand_num)]
 while running:
     handle_events()
     boy.update()
-    clear_canvas()
+    small_ball.update()
+    big_ball.update()
 
+    clear_canvas()
     grass.draw()
-    boy.draw()
+
+    # 소년들 출력
+
+    for boy in team:
+        boy.update()
+
+    for boy in team:
+        boy.draw()
+
+    # 공 출력
+    # 작은공 #
+
+    for small_ball in _samll_ball_num:
+        small_ball.update()
+
+    for small_ball in _samll_ball_num:
+        small_ball.draw()
+    # 큰공
+    for big_ball in _blg_ball_num:
+        big_ball.update()
+
+    for big_ball in _blg_ball_num:
+        big_ball.draw()
+
     update_canvas()
 
     delay(0.05)
