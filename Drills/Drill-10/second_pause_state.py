@@ -1,7 +1,6 @@
 import game_framework
 from pico2d import *
 import main_state
-import main_state
 name = "TitleState"
 image = None
 
@@ -30,15 +29,18 @@ def handle_events():
 i=0
 def draw():
     global i
-    clear_canvas()
     if( i % 2 == 0):
+        clear_canvas()
+        main_state.draw()
         image.draw(400,300)
         update_canvas()
     else:
+        clear_canvas()
+        main_state.draw()
         update_canvas()
 
 
-    i ++
+    i += 1
     pass
 
 def update():
