@@ -39,7 +39,7 @@ def draw():
         main_state.draw()
         update_canvas()
 
-    delay(0.05)
+    delay(0.1)
     i += 1
     pass
 
