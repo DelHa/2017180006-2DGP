@@ -27,11 +27,18 @@ def handle_events():
             elif (event.type, event.key ) == (SDL_KEYDOWN, SDLK_p):
                 game_framework.pop_state()
     pass
-
+i=0
 def draw():
+    global i
     clear_canvas()
-    image.draw(400, 300)
-    update_canvas()
+    if( i % 2 == 0):
+        image.draw(400,300)
+        update_canvas()
+    else:
+        update_canvas()
+
+
+    i ++
     pass
 
 def update():
