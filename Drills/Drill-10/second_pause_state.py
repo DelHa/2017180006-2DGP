@@ -40,7 +40,8 @@ def draw():
         update_canvas()
 
     delay(0.1)
-    i += 1
+    i += 2
+
     pass
 
 def update():
