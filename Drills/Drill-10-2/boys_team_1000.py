@@ -11,13 +11,14 @@ class Grass:
 
 
 class Boy:
-
+    image = None
     def __init__(self):
         self.x, self.y = random.randint(100, 700), 90
         self.frame = random.randint(0, 7)
-        self.image = load_image('run_animation.png')
+        if Boy.image == None:
+            Boy.image = load_image('run_animation.png')
 
-
+#바로 실행 가능하게
     def update(self):
         self.frame = (self.frame + 1) % 8
         self.x += 5
