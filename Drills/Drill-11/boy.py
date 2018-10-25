@@ -174,7 +174,7 @@ next_state_table = {
     SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
                  LEFT_UP: RunState, RIGHT_UP: RunState,
                  SPACE: IdleState},
-    DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
+    DashState: {RIGHT_UP: DashState, LEFT_UP: DashState,
                 RIGHT_DOWN: DashState, LEFT_DOWN: DashState,
                 SLEEP_TIMER: IdleState , SPACE: IdleState,
                 DASH_UP: RunState, DASH_DOWN: DashState}
