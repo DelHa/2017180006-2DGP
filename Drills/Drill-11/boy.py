@@ -12,6 +12,8 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN, SDLK_SPACE): SPACE,
+    (SDL_KEYDOWN, SDLK_RSHIFT): DASH_DOWN ,
+    (SDL_KEYUP, SDLK_RSHIFT): DASH_UP,
     (SDL_KEYDOWN, SDLK_LSHIFT): DASH_DOWN ,
     (SDL_KEYUP, SDLK_LSHIFT): DASH_UP
 }
@@ -159,17 +161,17 @@ class SleepState:
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState,
                 RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
-                SLEEP_TIMER: SleepState , SPACE: IdleState},
+                SLEEP_TIMER: SleepState , SPACE: IdleState, DASH_DOWN: DashState, DASH_UP:IdleState},
 
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState},
 
     SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
                  LEFT_UP: RunState, RIGHT_UP: RunState,
-                 SPACE: IdleState}
+                 SPACE: IdleState},
     DashState: {RIGHT_UP: RunState, LEFT_UP: RunState,
                 RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
-                SLEEP_TIMER: SleepState , SPACE: IdleState}
+                SLEEP_TIMER: SleepState , SPACE: IdleState, DASH_UP: DashState, DASH_DOWN: DashState}
 
 }
 
