@@ -2,7 +2,7 @@ from pico2d import *
 
 # Boy Event
 # fill here
-RIGHT_DOWN, LEFT_DOWN , RIGHT_UP , LEFT_UP = range(4)
+RIGHT_DOWN, LEFT_DOWN , RIGHT_UP , LEFT_UP , SLEEP_TIMER = range(5)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -16,6 +16,28 @@ key_event_table = {
 # Boy States
 
 # fill here
+class SleepState:
+    @staticmethod
+    def enter(boy, event):
+        boy.frame = 0
+
+    @staticmethod
+    def exit(boy, event):
+        pass
+
+    @staticmethod
+    def do(boy):
+        boy.frame = (boy.frame + 1)% 8
+
+    @staticmethod
+    def draw(boy, event):
+        if boy.dir == 1:
+            boy.image.clip_composite_draw(boy.frame * 100, 300 , 100, 100, 3.141592 / 2 , '' , boy.x - 25, boy.y - 25 , 100, 100)
+        else:
+            boy.image.clip_composite_draw(boy.frame * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100,
+                                          100)
+
+
 class IdleState:
     @staticmethod
     def enter(boy):
@@ -29,7 +51,9 @@ class IdleState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
-
+        boy.timer -= 1
+        if boy.timer == 0:
+            boy.add_event(SLEEP_TIMER)
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
@@ -70,7 +94,9 @@ IdleState: {
 RunState: {
             RIGHT_UP:IdleState , LEFT_UP : IdleState,
            LEFT_DOWN : IdleState, RIGHT_DOWN: IdleState
-            }
+            },
+SleepState: {LEFT_DOWN: RunState , RIGHT_DOWN: RunState,
+             LEFT_UP: RunState, RIGHT_UP: RunState}
 }
 
 
