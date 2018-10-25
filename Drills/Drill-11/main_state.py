@@ -20,10 +20,8 @@ def enter():
     global boy, grass, ball
     boy = Boy()
     grass = Grass()
-    ball = Ball()
     game_world.add_object(grass , 0)
     game_world.add_object(boy , 1)
-    game_world.add_object(ball, 2)
 
 
 def exit():
@@ -60,13 +58,4 @@ def draw():
     clear_canvas()
     for game_object in game_world.all_objects():
         game_object.draw()
-
-
     update_canvas()
-
-
-
-
-
-
-
