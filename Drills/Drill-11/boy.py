@@ -44,8 +44,8 @@ class DashState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + 1) % 8
-        boy.timer -= 1
-        boy.x += (boy.velocity * 3)
+        boy.timer -= 10
+        boy.x += (boy.velocity * 5)
         boy.x = clamp(25, boy.x, 1600 - 25)
 
         if boy.timer == 0:
@@ -87,7 +87,6 @@ class IdleState:
         boy.timer -= 1
         if boy.timer == 0:
             boy.add_event(SLEEP_TIMER)
-
 
     @staticmethod
     def draw(boy):
@@ -162,21 +161,20 @@ class SleepState:
 
 
 next_state_table = {
-    IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState,
+    IdleState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                 RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
                 SLEEP_TIMER: SleepState , SPACE: IdleState,
                 DASH_DOWN: IdleState, DASH_UP: IdleState},
 
     RunState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                LEFT_DOWN: IdleState, RIGHT_DOWN: IdleState, SPACE: RunState,
-               DASH_DOWN: DashState, DASH_UP: DashState},
+               DASH_DOWN: DashState, DASH_UP: RunState},
 
     SleepState: {LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
                  LEFT_UP: RunState, RIGHT_UP: RunState,
                  SPACE: IdleState},
-    DashState: {RIGHT_UP: DashState, LEFT_UP: DashState,
+    DashState: {RIGHT_UP: IdleState, LEFT_UP: IdleState,
                 RIGHT_DOWN: DashState, LEFT_DOWN: DashState,
-                SLEEP_TIMER: IdleState , SPACE: IdleState,
                 DASH_UP: RunState, DASH_DOWN: DashState}
 }
 
