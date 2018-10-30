@@ -3,6 +3,7 @@ from pico2d import *
 from ball import Ball
 import math
 import game_world
+import random
 
 # Boy Run Speed
 # fill expressions correctly
@@ -120,6 +121,7 @@ class SleepState:
         boy.move_x = 0
         boy.move_y = 0
         boy.degree = 270
+        boy.rand_opaf_ =1
         #들어왔을때 시간 체크
 
     @staticmethod
@@ -133,25 +135,28 @@ class SleepState:
             boy.t += 0.02
             boy.pivot_x += 0.2
             boy.pivot_y += 0.5
+            boy.rand_opaf_ -= 0.01
 
         if(boy.t >= 3.141592 / 2):
             boy.start = True
 
+
         if boy.start == True:
             boy.degree = (boy.degree  + 720 * game_framework.frame_time) % 360
-
+            boy.rand_opaf_ = random.randint(1, 9) / 10
 
         boy.move_x = 300 * math.cos((boy.degree) * (3.141592 / 180))
         boy.move_y = 300 * math.sin((boy.degree) * (3.141592/ 180)) + 300
 
+
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
+            boy.image.opacify(boy.rand_opaf_)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2 - boy.t, '', boy.x - 25 + boy.move_x + boy.pivot_x , boy.y - 25 + boy.move_y + boy.pivot_y, 100, 100)
             boy.image.opacify(1)
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25,
-                                          100, 100)
-            boy.image.opacify(0.5)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+
 
             if(boy.degree % 180 == 0):
                 print("1234")
@@ -218,6 +223,7 @@ class Boy:
         self.degree = 0
         self.t = 0
         self.start = False
+        self.rand_opaf_ = 0.1
 
 
     def fire_ball(self):
