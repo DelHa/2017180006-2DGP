@@ -59,7 +59,7 @@ class IdleState:
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
         boy.timer -= 1
-        if get_time() >= 10: #딱 10초에 눕는다.
+        if get_time() >= 5: #딱 10초에 눕는다.
             boy.add_event(SLEEP_TIMER)
 
     @staticmethod
@@ -111,18 +111,15 @@ class RunState:
 current_time = 0
 save_time = 0
 class SleepState:
-    global save_time
-    global current_time
     global enter_ghost
 
     @staticmethod
     def enter(boy, event):
         boy.frame = 0
-        current_time = get_time()
-        save_time = get_time()
         enter_ghost = False
         boy.move_x = 0
         boy.move_y = 0
+        boy.degree = 0
         #들어왔을때 시간 체크
 
     @staticmethod
@@ -132,9 +129,9 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        save_time = get_time()
-        boy.move_x = 300 * math.cos(save_time )
-        boy.move_y = 300 * math.sin(save_time )
+        boy.degree = 0
+        boy.move_x = 200 * math.cos(45 - boy.degree)
+        boy.move_y = 200 * math.sin(45 - boy.degree) + 200
 
     @staticmethod
     def draw(boy):
@@ -202,6 +199,7 @@ class Boy:
         self.cur_state.enter(self, None)
         self.move_x = 0
         self.move_y = 0
+        self.degree = 0
 
 
     def fire_ball(self):
