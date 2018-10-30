@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 from ball import Ball
-
+import math
 import game_world
 
 # Boy Run Speed
@@ -109,8 +109,9 @@ class RunState:
             boy.image.clip_draw(int(boy.frame) * 100, 0, 100, 100, boy.x, boy.y)
 
 current_time = 0
-
+save_time = 0
 class SleepState:
+    global save_time
     global current_time
     global enter_ghost
 
@@ -118,7 +119,10 @@ class SleepState:
     def enter(boy, event):
         boy.frame = 0
         current_time = get_time()
+        save_time = get_time()
         enter_ghost = False
+        boy.move_x = 0
+        boy.move_y = 0
         #들어왔을때 시간 체크
 
     @staticmethod
@@ -128,19 +132,24 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        if get_time() >= 15:
-            enter_ghost = True
+        save_time = get_time()
+        boy.move_x = 300 * math.cos(save_time )
+        boy.move_y = 300 * math.sin(save_time )
 
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
-            if enter_ghost == True:
-                boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 4, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25 + boy.move_x, boy.y - 25 + boy.move_y, 100, 100)
+            boy.image.opacify(1)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25,
+                                          100, 100)
+            boy.image.opacify(0.5)
+
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
-            if enter_ghost == True:
-                boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, -3.141592 / 4, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.opacify(0.5)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, -3.141592 / 2, '', boy.x - 25, boy.y - 25, 100, 100)
+            boy.image.opacify(1)
 
 
 class GostState:
@@ -191,6 +200,8 @@ class Boy:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+        self.move_x = 0
+        self.move_y = 0
 
 
     def fire_ball(self):
