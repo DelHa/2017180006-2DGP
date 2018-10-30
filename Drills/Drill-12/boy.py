@@ -129,9 +129,9 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.degree = 0
-        boy.move_x = 200 * math.cos(45 - boy.degree)
-        boy.move_y = 200 * math.sin(45 - boy.degree) + 200
+        boy.degree = 180
+        boy.move_x = 150 * math.cos((boy.degree) * 3.141592)
+        boy.move_y = 150 * math.sin((boy.degree) * 3.141592) + 200
 
     @staticmethod
     def draw(boy):
