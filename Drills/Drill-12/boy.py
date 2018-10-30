@@ -119,7 +119,7 @@ class SleepState:
         enter_ghost = False
         boy.move_x = 0
         boy.move_y = 0
-        boy.degree = 0
+        boy.degree = 270
         #들어왔을때 시간 체크
 
     @staticmethod
@@ -129,18 +129,32 @@ class SleepState:
     @staticmethod
     def do(boy):
         boy.frame = (boy.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 8
-        boy.degree = 180
-        boy.move_x = 150 * math.cos((boy.degree) * 3.141592)
-        boy.move_y = 150 * math.sin((boy.degree) * 3.141592) + 200
+        if(boy.t <= 3.141592/2):
+            boy.t += 0.02
+            boy.pivot_x += 0.2
+            boy.pivot_y += 0.5
+
+        if(boy.t >= 3.141592 / 2):
+            boy.start = True
+
+        if boy.start == True:
+            boy.degree = (boy.degree  + 720 * game_framework.frame_time) % 360
+
+
+        boy.move_x = 300 * math.cos((boy.degree) * (3.141592 / 180))
+        boy.move_y = 300 * math.sin((boy.degree) * (3.141592/ 180)) + 300
 
     @staticmethod
     def draw(boy):
         if boy.dir == 1:
-            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25 + boy.move_x, boy.y - 25 + boy.move_y, 100, 100)
+            boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2 - boy.t, '', boy.x - 25 + boy.move_x + boy.pivot_x , boy.y - 25 + boy.move_y + boy.pivot_y, 100, 100)
             boy.image.opacify(1)
             boy.image.clip_composite_draw(int(boy.frame) * 100, 300, 100, 100, 3.141592 / 2, '', boy.x - 25, boy.y - 25,
                                           100, 100)
             boy.image.opacify(0.5)
+
+            if(boy.degree % 180 == 0):
+                print("1234")
 
         else:
             boy.image.clip_composite_draw(int(boy.frame) * 100, 200, 100, 100, -3.141592 / 2, '', boy.x + 25, boy.y - 25, 100, 100)
@@ -199,7 +213,11 @@ class Boy:
         self.cur_state.enter(self, None)
         self.move_x = 0
         self.move_y = 0
+        self.pivot_x = 0
+        self.pivot_y = 0
         self.degree = 0
+        self.t = 0
+        self.start = False
 
 
     def fire_ball(self):
