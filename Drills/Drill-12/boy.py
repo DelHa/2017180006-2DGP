@@ -57,6 +57,7 @@ class IdleState:
         boy.timer = 1000
 
 
+
     @staticmethod
     def exit(boy, event):
         if event == SPACE:
@@ -137,7 +138,6 @@ class SleepState:
 
     @staticmethod
     def exit(boy, event):
-        game_world.remove_object(Ghost)
         pass
 
     @staticmethod

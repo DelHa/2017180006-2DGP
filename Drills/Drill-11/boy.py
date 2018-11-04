@@ -196,10 +196,8 @@ class Boy:
         # fill here
         print('Fire Ball')
         ball = Ball(self.x , self.y , self.dir * 3)
-        game_world.add_object(ball, 1)
+        game_world.add_object(ball, 2)
         pass
-
-
 
     def add_event(self, event):
         self.event_que.insert(0, event)

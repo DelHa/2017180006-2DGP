@@ -13,7 +13,7 @@ class Ball:
         self.image.draw(self.x, self.y)
 
     def update(self):
-        self.x += self.velocity
+        self.y += self.velocity
 
-        if self.x < 25 or self.x > 1600 - 25:
+        if self.y < 25 or self.y > 1600 - 25:
             game_world.remove_object(self)
