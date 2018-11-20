@@ -8,7 +8,10 @@ import game_world
 
 from boy import Boy
 # fill here
+#배경화면 함수를 불러온다 as는 무슨 의미?
 from background import FixedBackground as Background
+#from background import InfiniteBackground as Background
+
 
 name = "MainState"
 
