@@ -11,6 +11,11 @@ class FixedBackground:
         self.canvas_height = get_canvas_height()
         self.w = self.image.w
         self.h = self.image.h
+        # fill here
+        self.bgm = load_music('football.mp3')
+        self.bgm.set_volume(64)
+        self.bgm.repeat_play()
+
 
     def set_center_object(self, boy):
         # fill here

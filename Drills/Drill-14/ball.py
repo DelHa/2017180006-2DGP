@@ -2,10 +2,10 @@ import random
 from pico2d import *
 import game_world
 import game_framework
-from background import InfiniteBackground
+from background import FixedBackground
 import main_state
 
-background = InfiniteBackground
+background = FixedBackground
 
 
 class Ball:
@@ -35,6 +35,7 @@ class Ball:
     def draw(self):
          #self.y = self.y + main_state.boy.text_y
          #self.output_x = (self.x + main_state.boy.x)
+
          self.image.draw((self.x - main_state.boy.x) , (self.y - main_state.boy.y))
 
          draw_rectangle(*self.get_bb())
