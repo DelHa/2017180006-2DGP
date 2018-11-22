@@ -80,6 +80,8 @@ class WalkingState:
         cx = boy.x - boy.bg.window_left
         cy = boy.y - boy.bg.window_bottom
 
+        boy.scroll_x , boy.scroll_y = boy.x - boy.bg.window_left,boy.y - boy.bg.window_bottom
+
         boy.text_x = cx
         boy.text_y = cy
 
@@ -130,6 +132,8 @@ class Boy:
        # fill heree
         self.eat_sound = load_wav('pickup.wav')
         self.eat_sound.set_volume(32)
+
+        self.scroll_x , self.scroll_y = 0,0
 
 
     def get_bb(self):

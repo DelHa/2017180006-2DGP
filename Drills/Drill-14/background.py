@@ -51,6 +51,7 @@ class InfiniteBackground:
         self.image = load_image('futsal_court.png')
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
+
         self.w = self.image.w
         self.h = self.image.h
 
