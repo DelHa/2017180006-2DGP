@@ -9,8 +9,8 @@ import game_world
 from boy import Boy
 # fill here
 #배경화면 함수를 불러온다 as는 무슨 의미?
-from background import FixedBackground as Background
-#from background import InfiniteBackground as Background
+#from background import FixedBackground as Background
+from background import InfiniteBackground as Background
 from ball import Ball
 
 
@@ -49,7 +49,7 @@ def enter():
 
 
     global balls
-    balls = [Ball() for i in range(10)]
+    balls = [Ball() for i in range(100)]
     game_world.add_objects(balls, 1)
 
 def exit():
@@ -86,6 +86,8 @@ def update():
             # fill here
             boy.eat(ball)
             boy.scroll_y += 1
+            print("t")
+            boy.hit += 1
             game_world.remove_object(ball)
 
 def draw():

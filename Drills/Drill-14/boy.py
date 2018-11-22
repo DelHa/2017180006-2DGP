@@ -71,19 +71,26 @@ class WalkingState:
         boy.y += boy.y_velocity * game_framework.frame_time
 
         # fill here
-        boy.x = clamp(20 + (boy.y / boy.bg.h) * 200, boy.x, boy.bg.w - 10 - (boy.y / boy.bg.h) * 200)
-        boy.y = clamp(90, boy.y, boy.bg.h - 90)
+        #boy.x = clamp(20 + (boy.y / boy.bg.h) * 200, boy.x, boy.bg.w - 10 - (boy.y / boy.bg.h) * 200)
+        #boy.y = clamp(90, boy.y, boy.bg.h - 90)
+
+        #boy.x = clamp(boy.canvas_width // 2, boy.x, boy.bg.w - boy.canvas_width // 2)
+        #boy.y = clamp(boy.canvas_height // 2, boy.y, boy.bg.h - boy.canvas_height // 2)
+
+        boy.x = clamp(0, boy.x , boy.bg.w)
+        boy.y = clamp(0, boy.y, boy.bg.h)
 
     @staticmethod
     def draw(boy):
         # fill here
-        cx = boy.x - boy.bg.window_left
-        cy = boy.y - boy.bg.window_bottom
+        #cx = boy.x - boy.bg.window_left
+        #cy = boy.y - boy.bg.window_bottom
 
-        boy.scroll_x , boy.scroll_y = boy.x - boy.bg.window_left,boy.y - boy.bg.window_bottom
+        cx, cy = boy.canvas_width // 2, boy.canvas_height // 2
 
         boy.text_x = cx
         boy.text_y = cy
+
 
         if boy.x_velocity > 0:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, cx, cy)
@@ -128,16 +135,18 @@ class Boy:
         self.cur_state = WalkingState
         self.cur_state.enter(self, None)
         self.text_x, self.text_y = 0, 0
+        self.hit = 0
 
        # fill heree
         self.eat_sound = load_wav('pickup.wav')
+
         self.eat_sound.set_volume(32)
 
         self.scroll_x , self.scroll_y = 0,0
 
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return 400 - 50 ,300 - 50, 400 + 50, 300 + 50
 
 
     def set_background(self, bg):
@@ -163,8 +172,12 @@ class Boy:
             self.cur_state.enter(self, event)
 
     def draw(self):
+        draw_rectangle(*self.get_bb())
         self.cur_state.draw(self)
         self.font.draw(self.text_x - (16 * (5 - 1)), self.text_y + 50, '(%5d, %5d)' % (self.x, self.y), (255, 255, 0))
+        self.font.draw(self.text_x - (16 * (5 - 1)), self.text_y + 100, '(ball_eat_count %5d)' % (self.hit), (255, 20, 20))
+
+        #draw_rectangle(*self.get_bb())
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
