@@ -127,6 +127,11 @@ class Boy:
         self.cur_state.enter(self, None)
         self.text_x, self.text_y = 0, 0
 
+       # fill heree
+        self.eat_sound = load_wav('pickup.wav')
+        self.eat_sound.set_volume(32)
+
+
     def get_bb(self):
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
 
@@ -138,6 +143,12 @@ class Boy:
 
     def add_event(self, event):
         self.event_que.insert(0, event)
+
+    def eat(self, ball):
+        # fill here
+        self.eat_sound.play()
+        pass
+
 
     def update(self):
         self.cur_state.do(self)
