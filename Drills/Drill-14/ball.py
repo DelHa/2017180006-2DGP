@@ -26,7 +26,10 @@ class Ball:
         #
 
     def get_bb(self):
-        return self.x - 10 - main_state.boy.x, self.y - 10 - main_state.boy.y, self.x + 10 - main_state.boy.x, self.y + 10 - main_state.boy.y
+        self.x -= main_state.boy.x
+        self.y -= main_state.boy.y
+
+        return self.x - 10, self.y - 10 , self.x + 10 , self.y + 10
 
     def draw(self):
          #self.y = self.y + main_state.boy.text_y
