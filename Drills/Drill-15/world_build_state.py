@@ -15,7 +15,7 @@ from zombie import Zombie
 
 boy = None
 
-
+returnZombie = []
 name = "WorldBuildState"
 
 menu = None
@@ -60,7 +60,8 @@ def load_saved_world():
         if isinstance(o, Boy):
             boy = o
             break
-
+        if isinstance(o, Zombie):
+            returnZombie.append(o)
 
 def handle_events():
     events = get_events()

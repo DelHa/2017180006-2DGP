@@ -6,12 +6,11 @@ import os
 from pico2d import *
 import game_framework
 import game_world
-import ranking_state
+import main_state
 import world_build_state
-name = "MainState"
 
-#버틴 시간
-safe_time = 0
+name = "RankingState"
+
 
 def collide(a, b):
     # fill here
@@ -27,16 +26,10 @@ def collide(a, b):
 
 boy = None
 
-twice_zombie = None
-
 def enter():
     # game world is prepared already in world_build_state
-    global boy
-    global safe_time
-    global twice_zombie
-    boy = world_build_state.get_boy()
-    twice_zombie = world_build_state.returnZombie
-    safe_time = 0
+
+    print(main_state.safe_time)
     pass
 
 def exit():
@@ -57,24 +50,12 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.change_state(world_build_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_s:
-            game_world.save()
-        else:
-            boy.handle_event(event)
+
 
 def update():
-    global safe_time
-    global twice_zombie
-    safe_time += 0.1
-
     for game_object in game_world.all_objects():
         game_object.update()
 
-    for zombie_count in twice_zombie:
-        if collide(boy, zombie_count):
-            game_framework.change_state(ranking_state)
-            print(zombie_count)
-            break
 
 def draw():
     clear_canvas()
@@ -82,9 +63,6 @@ def draw():
         game_object.draw()
     update_canvas()
 
-def out_put_time():
-    global safe_time
-    return safe_time
 
 
 
