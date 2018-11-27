@@ -22,12 +22,8 @@ def enter():
 
     with open('score.json', 'r') as f:
         score = json.load(f)
-    for i in range(len(score)):
-        if(score[i] < score[i+1]):
-            tmp = score[i]
-            score[i + 1] = score[i]
-            score[i + 1] = tmp
-        pass
+
+    score.sort(reverse = True)
 
 
 
@@ -57,7 +53,7 @@ def draw():
     count = 0
     font.draw(800, 850, '[Total Ranking]', (0,0,0))
     for i in score:
-        if(count < 10):
+        if(count < 11):
             font.draw(200, 800 - (count * 80), '(# %d)' % (count + 1), (0, 0, 0))
             font.draw(300, 800 - (count * 80 ), '(Time: %3.4f)' % (i), (0, 0, 0))
             count += 1
