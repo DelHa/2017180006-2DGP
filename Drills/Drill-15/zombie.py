@@ -46,11 +46,13 @@ class Zombie:
 
     def __getstate__(self):
         # fill here
-        pass
-
+        state = {'x': self.x, 'y': self.y, 'dir': self.dir, 'name': self.name, 'size': self.size}
+        return state
 
     def __setstate__(self, state):
         # fill here
+        self.__init__()
+        self.__dict__.update(state)
         pass
 
 

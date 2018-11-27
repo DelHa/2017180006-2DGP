@@ -45,13 +45,21 @@ def create_new_world():
     game_world.add_object(boy, 1)
 
     # fill here
+    with open('zombie_data.json', 'r') as f:
+        zombie_data_list = json.load(f)
 
-
+    for data in zombie_data_list:
+        zombie = Zombie(data['name'], data['x'], data['y'], data['size'])
+        game_world.add_object(zombie, 1)
 
 def load_saved_world():
     global boy
-
     # fill here
+    game_world.load()
+    for o in game_world.all_objects():
+        if isinstance(o, Boy):
+            boy = o
+            break
 
 
 def handle_events():

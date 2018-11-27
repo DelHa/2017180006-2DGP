@@ -34,8 +34,14 @@ def all_objects():
 
 def save():
     # fill here
+    with open('game.sav', 'wb') as f:
+        pickle.dump(objects, f)
+
     pass
 
 def load():
     # fill here
+    global objects
+    with open('game.sav', 'rb') as f:
+        objects = pickle.load(f)
     pass

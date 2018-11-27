@@ -131,12 +131,14 @@ class Boy:
 
     def __getstate__(self):
         # fill here
-        pass
+        state  = {'x': self.x , 'y': self.y , 'dir': self.dir, 'cur_state':self.cur_state}
+        return state
 
 
     def __setstate__(self, state):
         # fill here
-        pass
+        self.__init__()
+        self.__dict__.update(state)
 
     def get_bb(self):
         # fill here
@@ -144,9 +146,9 @@ class Boy:
 
 
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.dir * RUN_SPEED_PPS * 10)
-        game_world.add_object(ball, 1)
-
+        #ball = Ball(self.x, self.y, self.dir * RUN_SPEED_PPS * 10)
+        #game_world.add_object(ball, 1)
+        pass
 
     def add_event(self, event):
         self.event_que.insert(0, event)
