@@ -1,24 +1,15 @@
 import random
 import json
+import pickle
 import os
 
 from pico2d import *
 import game_framework
 import game_world
 
-from boy import Boy
-# fill here
-#배경화면 함수를 불러온다 as는 무슨 의미?
-from background import FixedBackground as Background
-#from background import InfiniteBackground as Background
-from ball import Ball
-
+import world_build_state
 
 name = "MainState"
-
-boy = None
-background = None
-balls = []
 
 
 def collide(a, b):
@@ -33,24 +24,13 @@ def collide(a, b):
 
     return True
 
+boy = None
 
 def enter():
+    # game world is prepared already in world_build_state
     global boy
-    boy = Boy()
-    game_world.add_object(boy, 2)
-
-    global background
-    background = Background()
-    game_world.add_object(background, 0)
-
-    # fill here
-    background.set_center_object(boy)
-    boy.set_background(background)
-
-
-    global balls
-    balls = [Ball() for i in range(100)]
-    game_world.add_objects(balls, 1)
+    boy = world_build_state.get_boy()
+    pass
 
 def exit():
     game_world.clear()
@@ -69,26 +49,17 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.change_state(world_build_state)
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_s:
+            game_world.save()
         else:
             boy.handle_event(event)
 
 
 def update():
-    global boy
-    global ball
     for game_object in game_world.all_objects():
         game_object.update()
-    for ball in balls:
 
-        if collide(boy, ball):
-            balls.remove(ball)
-            # fill here
-            boy.eat(ball)
-            boy.scroll_y += 1
-            print("t")
-            boy.hit += 1
-            game_world.remove_object(ball)
 
 def draw():
     clear_canvas()
