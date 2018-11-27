@@ -35,7 +35,7 @@ def enter():
     font = load_font('ENCR10B.TTF', 40)
     print(main_state.safe_time)
 
-    with open('score.json' , 'r') as f:
+    with open('score.json', 'r', encoding="utf-8") as f:
         score = json.load(f)
 
 

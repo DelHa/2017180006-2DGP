@@ -12,7 +12,7 @@ name = "MainState"
 
 #버틴 시간
 safe_time = 0
-
+array = []
 def collide(a, b):
     # fill here
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -67,6 +67,7 @@ def update():
     global safe_time
     global twice_zombie
     global test_count
+    global array
     safe_time += 0.1
 
     for game_object in game_world.all_objects():
@@ -75,8 +76,13 @@ def update():
     for zombie_count in twice_zombie:
         if collide(boy, zombie_count):
             print(zombie_count)
-            with open('score.json', 'a', encoding="utf-8") as f:
-                json.dump(int(safe_time), f, ensure_ascii=False, indent="\n")
+            with open('score.json', 'r', encoding="utf-8") as f:
+                array = json.load(f)
+
+            
+
+            with open('score.json', 'w', encoding="utf-8") as f:
+                json.dump((safe_time), f, ensure_ascii=False, indent='\t')
             game_framework.change_state(ranking_state)
             break
 
