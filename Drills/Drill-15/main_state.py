@@ -74,10 +74,10 @@ def update():
 
     for zombie_count in twice_zombie:
         if collide(boy, zombie_count):
-            game_framework.change_state(ranking_state)
             print(zombie_count)
-            test_count += 1
-            print(test_count)
+            with open('score.json', 'a', encoding="utf-8") as f:
+                json.dump(int(safe_time), f, ensure_ascii=False, indent="\n")
+            game_framework.change_state(ranking_state)
             break
 
 

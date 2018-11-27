@@ -10,7 +10,9 @@ import main_state
 import world_build_state
 
 name = "RankingState"
+font = None
 
+score = []
 
 def collide(a, b):
     # fill here
@@ -28,9 +30,14 @@ boy = None
 
 def enter():
     # game world is prepared already in world_build_state
-
+    global font
+    global score
+    font = load_font('ENCR10B.TTF', 40)
     print(main_state.safe_time)
-    pass
+
+    with open('score.json' , 'r') as f:
+        score = json.load(f)
+
 
 def exit():
     game_world.clear()
@@ -58,9 +65,13 @@ def update():
 
 
 def draw():
+    global font
     clear_canvas()
-    for game_object in game_world.all_objects():
-        game_object.draw()
+#    for game_object in game_world.all_objects():
+#        game_object.draw()
+    for i in score:
+        font.draw(300, 400, '(Time: %3.2f)' % (score[i]), (0, 0, 0))
+
     update_canvas()
 
 
