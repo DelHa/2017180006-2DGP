@@ -62,9 +62,11 @@ def handle_events():
         else:
             boy.handle_event(event)
 
+test_count = 0
 def update():
     global safe_time
     global twice_zombie
+    global test_count
     safe_time += 0.1
 
     for game_object in game_world.all_objects():
@@ -74,17 +76,16 @@ def update():
         if collide(boy, zombie_count):
             game_framework.change_state(ranking_state)
             print(zombie_count)
+            test_count += 1
+            print(test_count)
             break
+
 
 def draw():
     clear_canvas()
     for game_object in game_world.all_objects():
         game_object.draw()
     update_canvas()
-
-def out_put_time():
-    global safe_time
-    return safe_time
 
 
 

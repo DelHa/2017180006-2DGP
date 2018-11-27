@@ -51,6 +51,7 @@ def create_new_world():
     for data in zombie_data_list:
         zombie = Zombie(data['name'], data['x'], data['y'], data['size'])
         game_world.add_object(zombie, 1)
+        returnZombie.append(zombie)
 
 def load_saved_world():
     global boy
