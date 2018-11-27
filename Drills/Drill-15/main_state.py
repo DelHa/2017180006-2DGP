@@ -9,10 +9,15 @@ import game_world
 import ranking_state
 import world_build_state
 name = "MainState"
+from collections import  OrderedDict
 
 #버틴 시간
 safe_time = 0
-array = []
+
+
+load_Rank = None
+tmp_Rank = []
+
 def collide(a, b):
     # fill here
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -64,25 +69,28 @@ def handle_events():
 
 test_count = 0
 def update():
-    global safe_time
     global twice_zombie
-    global test_count
-    global array
-    safe_time += 0.1
+    global load_Rank
+    global tmp_Rank
 
     for game_object in game_world.all_objects():
         game_object.update()
 
+    file_data = OrderedDict()
+
     for zombie_count in twice_zombie:
         if collide(boy, zombie_count):
-            print(zombie_count)
-            with open('score.json', 'r', encoding="utf-8") as f:
-                array = json.load(f)
+            with open('score.json', 'r' ) as f:
+                load_Rank = json.load(f)
 
-            
+            save_time = (get_time() - boy.start_time)
+            load_Rank.append(save_time)
 
-            with open('score.json', 'w', encoding="utf-8") as f:
-                json.dump((safe_time), f, ensure_ascii=False, indent='\t')
+            with open('score.json', 'w') as f:
+                json.dump(load_Rank, f)
+
+            print(load_Rank)
+
             game_framework.change_state(ranking_state)
             break
 
